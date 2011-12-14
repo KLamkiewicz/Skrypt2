@@ -1,0 +1,34 @@
+#!/bin/bash
+#Autor Krzysztof Lamkiewicz
+
+echo "Czy posiadasz liste adresow email? T-tak N-nie"
+read odp
+
+function email
+{
+echo "Podaj nazwe listy adresow z jakiej chcesz skorzystac"
+read nazwa
+
+echo "Wpisz temat wiadomosci"
+read temat
+
+echo "Wpisz tresc wiadomosci"
+cat > $temat.txt
+
+slijdo=$(cat $nazwa)
+
+cat $temat.txt | mail -s "$temat" $slijdo
+}
+
+if [ $odp = "n" ] ; then
+
+echo "Podaj nazwe listy adresow email ktora chcesz stworzyc"
+read nazwa
+echo "Teraz wpisz adresy email"
+cat > $nazwa
+email
+
+elif [ $odp = "t" ] ; then
+email
+
+fi
